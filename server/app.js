@@ -5,8 +5,10 @@ const cors = require("cors");
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users.route');
+const graphqlHTTP = require('express-graphql');
 
 const app = express();
 
@@ -33,6 +35,9 @@ if (app.get('env') === 'production') {
 // Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/graphql', graphqlHTTP({
+
+}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
