@@ -9,6 +9,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users.route');
 const graphqlHTTP = require('express-graphql');
+const schema = require('./schemas/schema');
 
 const app = express();
 
@@ -36,7 +37,7 @@ if (app.get('env') === 'production') {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/graphql', graphqlHTTP({
-
+  schema: schema
 }));
 
 // catch 404 and forward to error handler
