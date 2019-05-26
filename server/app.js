@@ -37,7 +37,8 @@ if (app.get('env') === 'production') {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/graphql', graphqlHTTP({
-  schema: schema
+  schema: schema,
+  graphiql: true,
 }));
 
 // catch 404 and forward to error handler
