@@ -4,11 +4,13 @@ const path = require('path');
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
+const config = require('./config');
 
 
+const graphqlHTTP = require('express-graphql');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users.route');
-const graphqlHTTP = require('express-graphql');
 const schema = require('./schemas/schema');
 
 const app = express();
@@ -32,6 +34,21 @@ if (app.get('env') === 'production') {
     protocol == 'https' ? next() : res.redirect('https://' + req.hostname + req.url);
   });
 }
+
+// Connect to MongoDB
+mongoose.connect(config.MONGO_URI, {
+  //fixes deprication warnings
+  useCreateIndex: true,
+  useNewUrlParser: true,
+}, function(err) {
+    if (err) {
+      throw err;
+    } else {
+      console.log(`Successfully connected to ${config.MONGO_URI}`);
+    }
+  }
+);
+
 
 // Routes
 app.use('/', indexRouter);
