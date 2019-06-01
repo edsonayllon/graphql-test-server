@@ -12,7 +12,6 @@ import { getAuthorsQuery, addBookMutation } from '../queries/queries';
 
 class AddBook extends React.Component {
   state = {
-    selected: '',
     name: '',
     genre: '',
     authorId: ''
@@ -32,6 +31,13 @@ class AddBook extends React.Component {
   submitForm = (e) => {
     e.preventDefault();
     console.log(this.state);
+    this.props.addBookMutation({
+      variables: {
+        name: this.state.name,
+        genre: this.state.genre,
+        authorId: this.state.authorId
+      }
+    })
   }
 
   render() {
