@@ -21,11 +21,8 @@ export default class App extends React.Component {
     return (
       <ApolloProvider client={client}>
         <SafeAreaView style={styles.container}>
-          <View style={{ borderBottomColor: 'black' }}>
-            <Text style={{ fontSize: 50, marginBottom: 10 }}>Reading List</Text>
-          </View>
           <BookList />
-          <AddBook />
+
         </SafeAreaView>
       </ApolloProvider>
     );
@@ -36,7 +33,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    margin: 20
+    height: '100%'
   },
   image: {
     width: 100,
